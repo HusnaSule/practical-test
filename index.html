@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+    <style>
+         .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            grid-gap: 5px;
+        }
+
+        .image-container img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+        }
+    
+
+    </style>
+</head>
+<body>
+    <form id="imForm">
+        <h1>Viewer</h1>
+        <label for="imageCount">Number of Images:</label>
+        <input type="text" id="imageCount" name="imageCount" value="4">
+        <button type="button" onclick="displayTable()">Display Images</button>
+    </form>
+    <h3 id="message"> Images </h3>
+    <div class="image-container" id="imageContainer" ></div>
+
+    <script>
+        function displayTable() {
+            const imageContainer = document.getElementById('imageContainer');
+            const message = document.getElementById('message');
+            imageContainer.innerHTML = ' ';
+            message.innerHTML = 'images';
+
+            const imageCount = parseInt(document.getElementById('imageCount').value);
+
+            if (isNaN(imageCount) || imageCount <= 1) {
+                message.innerHTML = 'Please enter a valid number greater than 1';
+                return;
+            }
+
+            if (imageCount % 2 !== 0) {
+                message.innerHTML = 'Invalid value';
+                return;
+            }
+
+            for (let i = 1; i <= imageCount; i++) {
+                const img = document.createElement('img');
+                img.src = `./college${i}.png`;
+                img.alt = `college${i}`;
+                imageContainer.appendChild(img);
+
+            }
+        }
+    </script>
+</body>
+</html>
